@@ -54,7 +54,7 @@
     color: #000;
   }
 
-  /* === HERO BACKGROUND LINES (kembali ke semula) === */
+  /* === HERO BACKGROUND LINES === */
   .hero-bg {
     position: fixed;
     top: 0; left: 0;
@@ -192,16 +192,16 @@
     z-index: 1;
   }
 
-  /* overlay gradasi bawah (setebal area "2025") */
+  /* overlay gradasi bawah */
   .bottom-gradient {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* sesuaikan jika perlu */
+    height: 60px;
     background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
     pointer-events: none;
-    z-index: 10; /* di atas hero-bg tapi di bawah header/modal */
+    z-index: 10;
   }
 
   /* Modal Login */
@@ -284,167 +284,4 @@
     margin-top: 15px;
     gap: 20px;
   }
-  .forgot-register button {
-    font-size: 14px;
-    cursor: pointer;
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-weight: 700;
-    border: 2px solid #00ffd5;
-    background: transparent;
-    color: #00ffd5;
-    user-select: none;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-  }
-  .forgot-register button:hover {
-    background: #00ffd5;
-    color: #000;
-    border-color: #00ffd5;
-  }
-  .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 24px;
-    font-weight: 900;
-    color: #00ffd5;
-    cursor: pointer;
-    user-select: none;
-  }
-  .close-btn:hover {
-    color: #ffcb05;
-  }
-  @media (max-width: 480px) {
-    .modal-content {
-      padding: 30px 20px;
-      width: 90vw;
-    }
-    .forgot-register {
-      gap: 12px;
-    }
-    .forgot-register button {
-      padding: 6px 12px;
-      font-size: 13px;
-    }
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="logo-img">
-    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//logo-dsrt.png" alt="Logo DSRT" />
-  </div>
-  <button class="btn-login" id="openLoginBtn">Login</button>
-</header>
-
-<div class="hero-bg" aria-hidden="true">
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-</div>
-
-<section class="hero" aria-label="Hero Section">
-  <div class="hero-text">
-    <h1>DSRT</h1>
-    <p class="subtitle">Digital Smart Revise Technology</p>
-    <p class="description">
-      Adalah Solusi modern untuk pengeditan visual yang menggabungkan kekuatan Artificial Intelligence dan sentuhan manual profesional. Kami hadir untuk membantu kreator, fotografer, dan desainer menghasilkan karya berkualitas tinggi dengan cepat dan efisien.
-    </p>
-    <button class="btn-primary" onclick="alert('Fitur pelajari lebih lanjut akan dikembangkan')">Coba Sekarang</button>
-  </div>
-</section>
-
-<section class="features" aria-label="Fitur Unggulan DSRT">
-  <h2>Fitur Unggulan Kami</h2>
-  <div class="features-grid">
-    <div class="feature-item">
-      <div class="feature-icon">🛠️</div>
-      <h3>Manual Tools</h3>
-      <p>Kontrol pengeditan manual yang detail dan presisi untuk hasil maksimal.</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">🤖</div>
-      <h3>AI-powered Editing</h3>
-      <p>Teknologi AI membantu mempercepat dan menyempurnakan proses editing.</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">⚡</div>
-      <h3>Performa Cepat</h3>
-      <p>Respons sistem yang cepat untuk pengalaman pengguna yang lancar.</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">🔒</div>
-      <h3>Keamanan Data</h3>
-      <p>Privasi dan keamanan data Anda kami jaga dengan ketat.</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 DSRT - Digital Smart Revise Technology. All rights reserved.
-</footer>
-
-<!-- overlay bawah — menutupi garis di area footer (setebal "2025") -->
-<div class="bottom-gradient" aria-hidden="true"></div>
-
-<!-- Modal Login -->
-<div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">
-  <div class="modal-content">
-    <span class="close-btn" id="closeLoginBtn" aria-label="Close login form">&times;</span>
-    <h2 id="loginTitle">Login ke DSRT</h2>
-    <form id="loginForm">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Masukkan email" required />
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Masukkan password" required />
-      <button type="submit" class="login-submit">Login</button>
-    </form>
-    <div class="forgot-register">
-      <button class="forgot-btn" id="forgotPasswordLink">Forgot password?</button>
-      <button class="register-btn" id="registerBtn">Register</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  const openBtn = document.getElementById('openLoginBtn');
-  const modal = document.getElementById('loginModal');
-  const closeBtn = document.getElementById('closeLoginBtn');
-  const loginForm = document.getElementById('loginForm');
-  const forgotBtn = document.getElementById('forgotPasswordLink');
-  const registerBtn = document.getElementById('registerBtn');
-
-  openBtn.addEventListener('click', () => {
-    modal.classList.add('show');
-    modal.setAttribute('aria-hidden', 'false');
-  });
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('show');
-    modal.setAttribute('aria-hidden', 'true');
-  });
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-  });
-
-  loginForm.addEventListener('submit', e => {
-    e.preventDefault();
-    alert('Login functionality belum tersedia');
-  });
-
-  forgotBtn.addEventListener('click', () => {
-    alert('Fitur lupa password akan dikembangkan');
-  });
-
-  registerBtn.addEventListener('click', () => {
-    alert('Fitur registrasi akan dikembangkan');
-  });
-</script>
-
-</body>
-</html>
+  .forgot
