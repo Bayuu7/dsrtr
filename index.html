@@ -54,9 +54,10 @@
     color: #000;
   }
   .hero-bg {
-    position: fixed;
+    position: absolute;
     top: 0; left: 0;
-    width: 100%; height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
@@ -65,31 +66,17 @@
     position: absolute;
     background: rgba(0, 255, 213, 0.3);
     width: 2px;
-    animation: moveLine 6s linear infinite;
+    height: 80px; /* panjang garis pendek */
+    animation: moveLine 4s linear infinite;
   }
-  .line:nth-child(1) {
-    height: 120vh;
-    left: 20%;
-    animation-delay: 0s;
-  }
-  .line:nth-child(2) {
-    height: 100vh;
-    left: 40%;
-    animation-delay: 2s;
-  }
-  .line:nth-child(3) {
-    height: 140vh;
-    left: 60%;
-    animation-delay: 4s;
-  }
-  .line:nth-child(4) {
-    height: 110vh;
-    left: 80%;
-    animation-delay: 1s;
-  }
+  .line:nth-child(1) { left: 20%; animation-delay: 0s; }
+  .line:nth-child(2) { left: 40%; animation-delay: 1s; }
+  .line:nth-child(3) { left: 60%; animation-delay: 2s; }
+  .line:nth-child(4) { left: 80%; animation-delay: 3s; }
+
   @keyframes moveLine {
-    0% {transform: translateY(-100%);}
-    100% {transform: translateY(100%);}
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(100vh); }
   }
   section.hero {
     height: 100vh;
@@ -186,12 +173,12 @@
     text-align: center;
     font-weight: 700;
   }
+  /* Modal Login */
   .modal {
     display: none;
     position: fixed;
     z-index: 50;
-    left: 0;
-    top: 0;
+    left: 0; top: 0;
     width: 100vw;
     height: 100vh;
     overflow: auto;
@@ -321,14 +308,13 @@
   <button class="btn-login" id="openLoginBtn">Login</button>
 </header>
 
-<div class="hero-bg">
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-</div>
-
 <section class="hero" aria-label="Hero Section">
+  <div class="hero-bg">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
   <div class="hero-text">
     <h1>DSRT</h1>
     <p class="subtitle">Digital Smart Revise Technology</p>
