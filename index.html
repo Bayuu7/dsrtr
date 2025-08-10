@@ -1,430 +1,146 @@
-<!DOCTYPE html>  
-<html lang="id">  
-<head>  
-<meta charset="UTF-8" />  
-<meta name="viewport" content="width=device-width, initial-scale=1" />  
-<title>DSRT - Digital Smart Revise Technology</title>  
-<style>  
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');  
-  body, html {  
-    margin: 0; padding: 0; height: 100%;  
-    font-family: 'Roboto', sans-serif;  
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);  
-    color: white;  
-  }  
-  header {  
-    padding: 8px 20px;  
-    height: 48px;  
-    background: rgba(0,0,0,0.5);  
-    position: fixed;  
-    width: 100%;  
-    top: 0;  
-    z-index: 20;  
-    box-sizing: border-box;  
-    display: flex;  
-    justify-content: space-between;  
-    align-items: center;  
-    border-top: 1px solid rgba(255, 255, 255, 0.2);  
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);  
-  }  
-  .logo-img {  
-    height: 32px;  
-    display: flex;  
-    align-items: center;  
-  }  
-  .logo-img img {  
-    height: 100%;  
-    width: auto;  
-    user-select: none;  
-    cursor: default;  
-  }  
-  .btn-login {  
-    background: transparent;  
-    border: 2px solid #00ffd5;  
-    color: #00ffd5;  
-    padding: 6px 18px;  
-    border-radius: 30px;  
-    font-weight: 700;  
-    cursor: pointer;  
-    transition: all 0.3s ease;  
-    font-size: 14px;  
-  }  
-  .btn-login:hover {  
-    background: #00ffd5;  
-    color: #000;  
-  }  /* === HERO BACKGROUND LINES (kembali ke semula) === */
-.hero-bg {
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100vh;
-z-index: 0;
-overflow: hidden;
-pointer-events: none;
-}
-.line {
-position: absolute;
-background: rgba(0, 255, 213, 0.3);
-width: 2px;
-animation: moveLine 6s linear infinite;
-}
-.line:nth-child(1) {
-height: 120vh;
-left: 20%;
-animation-delay: 0s;
-}
-.line:nth-child(2) {
-height: 100vh;
-left: 40%;
-animation-delay: 2s;
-}
-.line:nth-child(3) {
-height: 140vh;
-left: 60%;
-animation-delay: 4s;
-}
-.line:nth-child(4) {
-height: 110vh;
-left: 80%;
-animation-delay: 1s;
-}
-@keyframes moveLine {
-0% { transform: translateY(-100%); }
-100% { transform: translateY(100%); }
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
 
-section.hero {
-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-padding: 0 20px;
-max-width: 1200px;
-margin: auto;
-position: relative;
-z-index: 1;
-}
-.hero-text {
-max-width: 700px;
-}
-.hero-text h1 {
-font-size: 4rem;
-font-weight: 900;
-color: #00ffd5;
-margin: 0 0 8px 0;
-user-select: none;
-}
-.hero-text .subtitle {
-font-size: 1.6rem;
-font-weight: 600;
-color: #a0f0e5;
-margin: 0 0 20px 0;
-}
-.hero-text .description {
-font-size: 1rem;
-font-weight: 400;
-color: #cde9e9;
-line-height: 1.6;
-margin: 0;
-}
-.hero-text .btn-primary {
-margin-top: 30px;
-background: #ffcb05;
-color: #000;
-padding: 16px 36px;
-font-size: 1.1rem;
-font-weight: 700;
-border: none;
-border-radius: 40px;
-cursor: pointer;
-width: fit-content;
-box-shadow: 0 5px 15px rgba(255,203,5,0.6);
-transition: background 0.3s ease;
-}
-.hero-text .btn-primary:hover {
-background: #f2a900;
-}
-section.features {
-max-width: 1200px;
-margin: 40px auto 60px;
-padding: 0 20px;
-}
-section.features h2 {
-text-align: center;
-color: #00ffd5;
-font-weight: 900;
-font-size: 2rem;
-margin-bottom: 24px;
-}
-.features-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-gap: 24px;
-}
-.feature-item {
-background: rgba(0,255,213,0.1);
-padding: 20px;
-border-radius: 12px;
-text-align: center;
-}
-.feature-icon {
-font-size: 48px;
-color: #00ffd5;
-margin-bottom: 12px;
-}
-.feature-item h3 {
-color: #00ffd5;
-margin-bottom: 8px;
-}
-.feature-item p {
-color: #cde9e9;
-}
-footer {
-background: #001f27;
-color: #00ffd5;
-padding: 20px 0;
-text-align: center;
-font-weight: 700;
-position: relative;
-z-index: 1;
-}
+    /* Animasi garis berjatuhan */
+    .falling-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-/* overlay gradasi bawah (setebal area "2025") */
-.bottom-gradient {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px; /* ubah sesuai kebutuhan */
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-  pointer-events: none;
-  z-index: 10; /* di atas hero-bg tapi di bawah header/modal */
-}
+    /* Container utama konten */
+    .container {
+      flex: 1;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
 
-/* Modal Login */
-.modal {
-display: none;
-position: fixed;
-z-index: 50;
-left: 0; top: 0;
-width: 100vw;
-height: 100vh;
-overflow: auto;
-background-color: rgba(0,0,0,0.6);
-backdrop-filter: blur(5px);
-justify-content: center;
-align-items: center;
-}
-.modal.show {
-display: flex;
-}
-.modal-content {
-background: #142a3a;
-padding: 30px 40px;
-border-radius: 12px;
-max-width: 400px;
-width: 90vw;
-box-sizing: border-box;
-color: white;
-position: relative;
-box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-}
-.modal-content h2 {
-margin-top: 0;
-margin-bottom: 20px;
-color: #00ffd5;
-font-weight: 900;
-text-align: center;
-}
-.modal-content label {
-display: block;
-margin-bottom: 6px;
-font-weight: 600;
-}
-.modal-content input[type="email"],
-.modal-content input[type="password"] {
-width: 100%;
-padding: 10px 14px;
-margin-bottom: 18px;
-border-radius: 6px;
-border: none;
-outline: none;
-font-size: 15px;
-box-shadow: inset 0 0 0 1px white;
-background: transparent;
-color: white;
-box-sizing: border-box;
-}
-.modal-content input::placeholder {
-color: #999;
-}
-.login-submit {
-background: #ffcb05;
-border: none;
-width: 100%;
-padding: 14px 0;
-font-weight: 700;
-font-size: 16px;
-border-radius: 30px;
-cursor: pointer;
-color: #000;
-box-shadow: 0 5px 15px rgba(255,203,5,0.7);
-transition: background 0.3s ease;
-}
-.login-submit:hover {
-background: #f2a900;
-}
-.forgot-register {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-top: 15px;
-gap: 20px;
-}
-.forgot-register button {
-font-size: 14px;
-cursor: pointer;
-padding: 6px 16px;
-border-radius: 30px;
-font-weight: 700;
-border: 2px solid #00ffd5;
-background: transparent;
-color: #00ffd5;
-user-select: none;
-white-space: nowrap;
-transition: all 0.3s ease;
-}
-.forgot-register button:hover {
-background: #00ffd5;
-color: #000;
-border-color: #00ffd5;
-}
-.close-btn {
-position: absolute;
-top: 12px;
-right: 18px;
-font-size: 24px;
-font-weight: 900;
-color: #00ffd5;
-cursor: pointer;
-user-select: none;
-}
-.close-btn:hover {
-color: #ffcb05;
-}
-@media (max-width: 480px) {
-.modal-content {
-padding: 30px 20px;
-width: 90vw;
-}
-.forgot-register {
-gap: 12px;
-}
-.forgot-register button {
-padding: 6px 12px;
-font-size: 13px;
-}
-}
-</style>
+    .container h1 {
+      margin-bottom: 20px;
+    }
 
-</head>  
-<body>  <header>  
-  <div class="logo-img">  
-    <img src="https://cacwogekvnrrmmnjtmql.supabase.co/storage/v1/object/public/restore//logo-dsrt.png" alt="Logo DSRT" />  
-  </div>  
-  <button class="btn-login" id="openLoginBtn">Login</button>  
-</header>  <div class="hero-bg" aria-hidden="true">  
-  <div class="line"></div>  
-  <div class="line"></div>  
-  <div class="line"></div>  
-  <div class="line"></div>  
-</div>  <section class="hero" aria-label="Hero Section">  
-  <div class="hero-text">  
-    <h1>DSRT</h1>  
-    <p class="subtitle">Digital Smart Revise Technology</p>  
-    <p class="description">  
-      Adalah Solusi modern untuk pengeditan visual yang menggabungkan kekuatan Artificial Intelligence dan sentuhan manual profesional. Kami hadir untuk membantu kreator, fotografer, dan desainer menghasilkan karya berkualitas tinggi dengan cepat dan efisien.  
-    </p>  
-    <button class="btn-primary" onclick="alert('Fitur pelajari lebih lanjut akan dikembangkan')">Coba Sekarang</button>  
-  </div>  
-</section>  <section class="features" aria-label="Fitur Unggulan DSRT">  
-  <h2>Fitur Unggulan Kami</h2>  
-  <div class="features-grid">  
-    <div class="feature-item">  
-      <div class="feature-icon">🛠️</div>  
-      <h3>Manual Tools</h3>  
-      <p>Kontrol pengeditan manual yang detail dan presisi untuk hasil maksimal.</p>  
-    </div>  
-    <div class="feature-item">  
-      <div class="feature-icon">🤖</div>  
-      <h3>AI-powered Editing</h3>  
-      <p>Teknologi AI membantu mempercepat dan menyempurnakan proses editing.</p>  
-    </div>  
-    <div class="feature-item">  
-      <div class="feature-icon">⚡</div>  
-      <h3>Performa Cepat</h3>  
-      <p>Respons sistem yang cepat untuk pengalaman pengguna yang lancar.</p>  
-    </div>  
-    <div class="feature-item">  
-      <div class="feature-icon">🔒</div>  
-      <h3>Keamanan Data</h3>  
-      <p>Privasi dan keamanan data Anda kami jaga dengan ketat.</p>  
-    </div>  
-  </div>  
-</section>  <footer>  
-  &copy; 2025 DSRT - Digital Smart Revise Technology. All rights reserved.  
-</footer>  <!-- overlay bawah — menutupi garis di area footer (setebal "2025") -->  <div class="bottom-gradient" aria-hidden="true"></div>  <!-- Modal Login -->  <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">  
-  <div class="modal-content">  
-    <span class="close-btn" id="closeLoginBtn" aria-label="Close login form">&times;</span>  
-    <h2 id="loginTitle">Login ke DSRT</h2>  
-    <form id="loginForm">  
-      <label for="email">Email</label>  
-      <input type="email" id="email" name="email" placeholder="Masukkan email" required />  
-      <label for="password">Password</label>  
-      <input type="password" id="password" name="password" placeholder="Masukkan password" required />  
-      <button type="submit" class="login-submit">Login</button>  
-    </form>  
-    <div class="forgot-register">  
-      <button class="forgot-btn" id="forgotPasswordLink">Forgot password?</button>  
-      <button class="register-btn" id="registerBtn">Register</button>  
-    </div>  
-  </div>  
-</div>  <script>  
-  const openBtn = document.getElementById('openLoginBtn');  
-  const modal = document.getElementById('loginModal');  
-  const closeBtn = document.getElementById('closeLoginBtn');  
-  const loginForm = document.getElementById('loginForm');  
-  const forgotBtn = document.getElementById('forgotPasswordLink');  
-  const registerBtn = document.getElementById('registerBtn');  
-  
-  openBtn.addEventListener('click', () => {  
-    modal.classList.add('show');  
-    modal.setAttribute('aria-hidden', 'false');  
-  });  
-  closeBtn.addEventListener('click', () => {  
-    modal.classList.remove('show');  
-    modal.setAttribute('aria-hidden', 'true');  
-  });  
-  window.addEventListener('click', (e) => {  
-    if (e.target === modal) {  
-      modal.classList.remove('show');  
-      modal.setAttribute('aria-hidden', 'true');  
-    }  
-  });  
-  
-  loginForm.addEventListener('submit', e => {  
-    e.preventDefault();  
-    alert('Login functionality belum tersedia');  
-  });  
-  
-  forgotBtn.addEventListener('click', () => {  
-    alert('Fitur lupa password akan dikembangkan');  
-  });  
-  
-  registerBtn.addEventListener('click', () => {  
-    alert('Fitur registrasi akan dikembangkan');  
-  });  
-</script>  
-</body>  
+    .container input {
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    .container button {
+      padding: 10px;
+      margin-top: 10px;
+      background: #00ffd0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      font-size: 14px;
+      color: #00ffd0;
+    }
+
+    /* Gradient langsung di dalam footer */
+    .footer-gradient {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+      padding: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animasi garis berjatuhan -->
+  <canvas class="falling-lines"></canvas>
+
+  <!-- Konten utama -->
+  <div class="container">
+    <h1>Login</h1>
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+  </div>
+
+  <!-- Footer dengan gradient -->
+  <footer>
+    <div class="footer-gradient">
+      © 2025 DSRT - Digital Smart Revise Technology. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Animasi garis berjatuhan
+    const canvas = document.querySelector('.falling-lines');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const lines = Array(100).fill().map(() => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      length: Math.random() * 20 + 10,
+      speed: Math.random() * 2 + 1
+    }));
+
+    function drawLines() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.lineWidth = 1;
+
+      lines.forEach(line => {
+        ctx.beginPath();
+        ctx.moveTo(line.x, line.y);
+        ctx.lineTo(line.x, line.y + line.length);
+        ctx.stroke();
+
+        line.y += line.speed;
+        if (line.y > height) {
+          line.y = -line.length;
+          line.x = Math.random() * width;
+        }
+      });
+
+      requestAnimationFrame(drawLines);
+    }
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    drawLines();
+  </script>
+
+</body>
 </html>
