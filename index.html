@@ -13,19 +13,22 @@
     color: white;
   }
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px; /* diperbarui agar logo lebih ke kiri */
+    padding: 8px 20px;
+    height: 48px;
     background: rgba(0,0,0,0.5);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 20;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   .logo-img {
-    height: 60px; /* diperbesar dari 40px */
+    height: 32px;
     display: flex;
     align-items: center;
   }
@@ -39,12 +42,12 @@
     background: transparent;
     border: 2px solid #00ffd5;
     color: #00ffd5;
-    padding: 8px 22px;
+    padding: 6px 18px;
     border-radius: 30px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 16px;
+    font-size: 14px;
   }
   .btn-login:hover {
     background: #00ffd5;
@@ -92,8 +95,8 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* vertical center */
-    align-items: center;     /* horizontal center */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 0 20px;
     max-width: 1200px;
@@ -141,8 +144,6 @@
   .hero-text .btn-primary:hover {
     background: #f2a900;
   }
-
-  /* Fitur Unggulan */
   section.features {
     max-width: 1200px;
     margin: 40px auto 60px;
@@ -178,7 +179,6 @@
   .feature-item p {
     color: #cde9e9;
   }
-
   footer {
     background: #001f27;
     color: #00ffd5;
@@ -186,10 +186,8 @@
     text-align: center;
     font-weight: 700;
   }
-
-  /* Modal styles */
   .modal {
-    display: none; /* hidden default */
+    display: none;
     position: fixed;
     z-index: 50;
     left: 0;
@@ -299,7 +297,6 @@
   .close-btn:hover {
     color: #ffcb05;
   }
-
   @media (max-width: 480px) {
     .modal-content {
       padding: 30px 20px;
