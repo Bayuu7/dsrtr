@@ -1,128 +1,523 @@
-<!DOCTYPE html>  <html lang="id">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Login Page</title>  
-  <style>  
-    body {  
-      margin: 0;  
-      padding: 0;  
-      height: 100vh;  
-      display: flex;  
-      flex-direction: column;  
-      justify-content: space-between;  
-      font-family: Arial, sans-serif;  
-      background: #111;  
-      color: white;  
-      overflow: hidden;  
-      position: relative;  
-    }  /* Animasi garis berjatuhan */  
-.falling-lines {  
-  position: absolute;  
-  top: 0;  
-  left: 0;  
-  width: 100%;  
-  height: 100%;  
-  pointer-events: none;  
-  z-index: 0;  
-}  
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CreativePro - Desain & Edit Mudah Online</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #5cbdb0; /* hijau toska lembut */
+    color: #333;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-/* Container utama konten */  
-.container {  
-  flex: 1;  
-  z-index: 2;  
-  display: flex;  
-  flex-direction: column;  
-  justify-content: center;  
-  align-items: center;  
-  position: relative;  
-}  
+  /* Animasi hujan */
+  .rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .drop {
+    position: absolute;
+    bottom: 100%;
+    width: 2px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+    }
+  }
 
-.container h1 {  
-  margin-bottom: 20px;  
-}  
+  header {
+    background: rgba(79, 70, 229, 0.9);
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
+  header .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+  nav#navLoggedOut, nav#navLoggedIn {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  nav#navLoggedOut a,
+  nav#navLoggedIn a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  nav#navLoggedOut a:hover,
+  nav#navLoggedIn a:hover,
+  nav#navLoggedOut a:focus,
+  nav#navLoggedIn a:focus {
+    color: #c7d2fe;
+    outline: none;
+  }
 
-.container input {  
-  padding: 10px;  
-  margin: 5px 0;  
-  border: none;  
-  border-radius: 5px;  
-  width: 200px;  
-}  
+  /* Login wrapper and button */
+  .login-wrapper {
+    position: relative;
+    margin-left: 20px;
+  }
+  #loginToggle {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+  }
+  #loginToggle:hover,
+  #loginToggle:focus {
+    background: rgba(255 255 255 / 0.2);
+    outline: none;
+  }
 
-.container button {  
-  padding: 10px;  
-  margin-top: 10px;  
-  background: #00ffd0;  
-  border: none;  
-  border-radius: 5px;  
-  cursor: pointer;  
-}  
+  /* Popup login form */
+  .login-popup {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    width: 260px;
+    background: white;
+    color: #333;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    padding: 20px;
+    z-index: 15000;
+  }
+  .login-popup form {
+    display: flex;
+    flex-direction: column;
+  }
+  .login-popup h3 {
+    margin: 0 0 15px;
+    font-size: 1.2rem;
+    color: #4f46e5;
+  }
+  .login-popup label {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  .login-popup input[type="email"],
+  .login-popup input[type="password"] {
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: 1.8px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  .login-popup input[type="email"]:focus,
+  .login-popup input[type="password"]:focus {
+    border-color: #4f46e5;
+    outline: none;
+  }
+  .login-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  .login-actions a {
+    font-size: 0.9rem;
+    color: #4f46e5;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .login-actions a:hover,
+  .login-actions a:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+  .btn-primary {
+    background: #4f46e5;
+    color: white;
+    padding: 10px 0;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background: #3730a3;
+    outline: none;
+  }
 
-/* Footer langsung dengan gradient */  
-footer {  
-  position: relative;  
-  z-index: 2;  
-  text-align: center;  
-  font-size: 14px;  
-  color: #00ffd0;  
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);  
-  padding: 15px 0;  
-}
+  main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 20px;
+    z-index: 10;
+    position: relative;
+  }
 
-  </style>  
-</head>  
-<body>    <!-- Animasi garis berjatuhan -->  <canvas class="falling-lines"></canvas>
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: white;
+    width: 100%;
+    margin-bottom: 60px;
+  }
+  .hero-text {
+    flex: 1 1 400px;
+    max-width: 600px;
+    padding-right: 20px;
+  }
+  .hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+  }
+  .hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  }
+  .hero-text .btn-primary {
+    background: #e0e7ff;
+    color: #4f46e5;
+    padding: 15px 30px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .hero-text .btn-primary:hover {
+    background: #c7d2fe;
+  }
+  .hero-image {
+    flex: 1 1 400px;
+    max-width: 600px;
+    text-align: center;
+    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.3));
+  }
+  .hero-image img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
 
-  <!-- Konten utama -->    <div class="container">  
-    <h1>Login</h1>  
-    <input type="text" placeholder="Username">  
-    <input type="password" placeholder="Password">  
-    <button>Login</button>  
-  </div>    <!-- Footer -->    <footer>  
-    © 2025 DSRT - Digital Smart Revise Technology. All rights reserved.  
-  </footer>    <script>  
-    // Animasi garis berjatuhan  
-    const canvas = document.querySelector('.falling-lines');  
-    const ctx = canvas.getContext('2d');  
-  
-    let width = canvas.width = window.innerWidth;  
-    let height = canvas.height = window.innerHeight;  
-  
-    const lines = Array(100).fill().map(() => ({  
-      x: Math.random() * width,  
-      y: Math.random() * height,  
-      length: Math.random() * 20 + 10,  
-      speed: Math.random() * 2 + 1  
-    }));  
-  
-    function drawLines() {  
-      ctx.clearRect(0, 0, width, height);  
-      ctx.strokeStyle = 'rgba(255,255,255,0.5)';  
-      ctx.lineWidth = 1;  
-  
-      lines.forEach(line => {  
-        ctx.beginPath();  
-        ctx.moveTo(line.x, line.y);  
-        ctx.lineTo(line.x, line.y + line.length);  
-        ctx.stroke();  
-  
-        line.y += line.speed;  
-        if (line.y > height) {  
-          line.y = -line.length;  
-          line.x = Math.random() * width;  
-        }  
-      });  
-  
-      requestAnimationFrame(drawLines);  
-    }  
-  
-    window.addEventListener('resize', () => {  
-      width = canvas.width = window.innerWidth;  
-      height = canvas.height = window.innerHeight;  
-    });  
-  
-    drawLines();  
-  </script>  </body>  
-</html>  ini cok
+  section.features {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+  .feature {
+    background: rgba(255, 255, 255, 0.9);
+    flex: 1 1 280px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  .feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  }
+  .feature img {
+    width: 70px;
+    margin-bottom: 20px;
+  }
+  .feature h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: #4f46e5;
+  }
+  .feature p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.4;
+  }
 
+  section.testimonials {
+    background: rgba(79, 70, 229, 0.9);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 60px;
+  }
+  section.testimonials h2 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+  }
+  .testimonial {
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    position: relative;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+  }
+  .testimonial::before {
+    content: "“";
+    font-size: 3rem;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    opacity: 0.2;
+  }
+  .testimonial::after {
+    content: "”";
+    font-size: 3rem;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.2;
+  }
+
+  /* Grid kotak fitur di atas footer */
+  .feature-grid {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+  }
+  .grid-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .grid-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.15);
+  }
+  .grid-item img {
+    width: 60px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 2px rgba(79,70,229,0.7));
+  }
+  .grid-item h4 {
+    color: #4f46e5;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .grid-item p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Section demo video */
+  section.demo {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 60px;
+    text-align: center;
+    color: white;
+  }
+  section.demo h2 {
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+  }
+  section.demo iframe {
+    width: 100%;
+    height: 480px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    border: none;
+  }
+
+  /* CTA Section */
+  section.cta {
+    background: #4f46e5;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  section.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  section.cta p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+  section.cta .btn-primary {
+    background: #e0e7ff;
+    color: #4f46e5;
+    padding: 15px 40px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: background 0.3s;
+  }
+  section.cta .btn-primary:hover {
+    background: #c7d2fe;
+  }
+
+  footer {
+    background: #1e293b;
+    color: #cbd5e1;
+    padding: 20px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
+  }
+  footer a {
+    color: #81aeb4;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      margin-bottom: 40px;
+    }
+    .hero-text, .hero-image {
+      max-width: 100%;
+      padding-right: 0;
+    }
+    .feature {
+      flex: 1 1 100%;
+    }
+    section.testimonials {
+      max-width: 100%;
+      margin-bottom: 40px;
+    }
+    .feature-grid {
+      gap: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="rain" id="rain"></div>
+
+<header>
+  <div class="logo">CreativePro</div>
+  <nav id="navLoggedOut">
+    <a href="#features">Fitur</a>
+    <a href="#testimonials">Testimoni</a>
+    <a href="#getstarted">Demo</a>
+  </nav>
+
+  <nav id="navLoggedIn" style="display:none;">
+    <a href="#menu">Menu</a>
+    <a href="#features">Fitur</a>
+    <a href="#profile">Profil</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </nav>
+
+  <div class="login-wrapper" id="loginWrapper">
+    <button id="loginToggle" aria-haspopup="true" aria-expanded="false">Login ke DSRT ▼</button>
+    <div class="login-popup" id="loginPopup" role="dialog" aria-modal="true" aria-labelledby="loginTitle" tabindex="-1">
+      <form id="loginForm">
+        <h3 id="loginTitle">Login ke DSRT</h3>
+        <label for="emailInput">Email :</label>
+        <input type="email" id="emailInput" name="email" required autocomplete="username" />
+        <label for="passwordInput">Password :</label>
+        <input type="password" id="passwordInput" name="password" required autocomplete="current-password" />
+        <div class="login-actions">
+          <a href="#" tabindex="0" onclick="alert('Forgot password clicked'); return false;">Forgot Password</a>
+          <a href="#" tabindex="0" onclick="alert('Register clicked'); return false;">Register</a>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Desain dan Edit Foto & Video <br />Secara Mudah dan Cepat</h1>
+      <p>Platform all-in-one untuk kreator yang ingin hasil profesional tanpa ribet. Template siap pakai, alat editing canggih, dan kolaborasi realtime.</p>
+      <button class="btn-primary" onclick="alert('Fitur segera hadir!')">Coba Gratis Sekarang</button>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Preview aplikasi CreativePro" />
+    </div>
+  </section>
+
+  <section class="features" id="features" tabindex="0" aria-label="Fitur Utama">
+    <div class="feature">
+      <img src="https://img.icons8.com/ios-filled/100/4f46e5/picture.png" alt="Edit Foto" />
+      <h3>Edit Foto Profesional</h3>
+      <p>Alat editing lengkap dengan filter, layer, dan efek yang mudah digunakan.</p>
+    </div>
+    <div class="feature">
+      <img src="https://img.icons8.com/ios-filled/100/4f46e5/video.png" alt="Edit Video" />
+      <h3>Edit Video Cepat</h3>
+      <p>Potong, gabung, dan beri efek pada video langsung dari browser.</p>
+    </div>
+    <div class="feature">
+      <img src="https://img.icons8.com/ios-filled/100/4f46e5/collaboration.png" alt="
