@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    padding: 15px 20px; /* diperbarui agar logo lebih ke kiri */
     background: rgba(0,0,0,0.5);
     position: fixed;
     width: 100%;
@@ -25,7 +25,7 @@
     box-sizing: border-box;
   }
   .logo-img {
-    height: 40px;
+    height: 60px; /* diperbesar dari 40px */
     display: flex;
     align-items: center;
   }
@@ -90,41 +90,42 @@
   }
   section.hero {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical center */
+    align-items: center;     /* horizontal center */
+    text-align: center;
     padding: 0 20px;
     max-width: 1200px;
     margin: auto;
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     position: relative;
     z-index: 1;
   }
-  .hero .short-logo {
+  .hero-text {
+    max-width: 700px;
+  }
+  .hero-text h1 {
+    font-size: 4rem;
     font-weight: 900;
-    font-size: 48px;
     color: #00ffd5;
-    letter-spacing: 5px;
-    margin: 0 0 12px 0;
+    margin: 0 0 8px 0;
     user-select: none;
   }
-  .hero h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1.2;
+  .hero-text .subtitle {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #a0f0e5;
     margin: 0 0 20px 0;
-    color: #00ffd5;
   }
-  .hero p {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    margin-bottom: 30px;
+  .hero-text .description {
+    font-size: 1rem;
+    font-weight: 400;
     color: #cde9e9;
-    max-width: 600px;
+    line-height: 1.6;
+    margin: 0;
   }
-  .btn-primary {
+  .hero-text .btn-primary {
+    margin-top: 30px;
     background: #ffcb05;
     color: #000;
     padding: 16px 36px;
@@ -137,7 +138,7 @@
     box-shadow: 0 5px 15px rgba(255,203,5,0.6);
     transition: background 0.3s ease;
   }
-  .btn-primary:hover {
+  .hero-text .btn-primary:hover {
     background: #f2a900;
   }
   section.features {
@@ -328,7 +329,14 @@
 </div>
 
 <section class="hero" aria-label="Hero Section">
-  <!-- nanti setelah ini kita rapiin bagian tengahnya -->
+  <div class="hero-text">
+    <h1>DSRT</h1>
+    <p class="subtitle">Digital Smart Revise Technology</p>
+    <p class="description">
+      Adalah Solusi modern untuk pengeditan visual yang menggabungkan kekuatan Artificial Intelligence dan sentuhan manual profesional. Kami hadir untuk membantu kreator, fotografer, dan desainer menghasilkan karya berkualitas tinggi dengan cepat dan efisien.
+    </p>
+    <button class="btn-primary" onclick="alert('Fitur pelajari lebih lanjut akan dikembangkan')">Coba Sekarang</button>
+  </div>
 </section>
 
 <footer>
