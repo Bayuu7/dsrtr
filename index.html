@@ -1,123 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSRT Landing Page</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: white;
-  }
+<!DOCTYPE html>  <html lang="id">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Login Page</title>  
+  <style>  
+    body {  
+      margin: 0;  
+      padding: 0;  
+      height: 100vh;  
+      display: flex;  
+      flex-direction: column;  
+      justify-content: space-between;  
+      font-family: Arial, sans-serif;  
+      background: #111;  
+      color: white;  
+      overflow: hidden;  
+      position: relative;  
+    }  /* Animasi garis berjatuhan */  
+.falling-lines {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  height: 100%;  
+  pointer-events: none;  
+  z-index: 0;  
+}  
 
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-    background-color: transparent;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-  }
+/* Container utama konten */  
+.container {  
+  flex: 1;  
+  z-index: 2;  
+  display: flex;  
+  flex-direction: column;  
+  justify-content: center;  
+  align-items: center;  
+  position: relative;  
+}  
 
-  header .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: black;
-  }
+.container h1 {  
+  margin-bottom: 20px;  
+}  
 
-  header nav a {
-    color: black;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: 500;
-  }
+.container input {  
+  padding: 10px;  
+  margin: 5px 0;  
+  border: none;  
+  border-radius: 5px;  
+  width: 200px;  
+}  
 
-  .hero {
-    height: 100vh;
-    background: url('wallpaper.jpg') center/cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    padding-top: 80px;
-  }
+.container button {  
+  padding: 10px;  
+  margin-top: 10px;  
+  background: #00ffd0;  
+  border: none;  
+  border-radius: 5px;  
+  cursor: pointer;  
+}  
 
-  .features {
-    padding: 60px 20px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    background-color: white;
-  }
+/* Footer langsung dengan gradient */  
+footer {  
+  position: relative;  
+  z-index: 2;  
+  text-align: center;  
+  font-size: 14px;  
+  color: #00ffd0;  
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);  
+  padding: 15px 0;  
+}
 
-  .feature-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-  }
+  </style>  
+</head>  
+<body>    <!-- Animasi garis berjatuhan -->  <canvas class="falling-lines"></canvas>
 
-  .footer-transparent {
-    position: relative;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 30px 20px;
-    text-align: center;
-  }
+  <!-- Konten utama -->    <div class="container">  
+    <h1>Login</h1>  
+    <input type="text" placeholder="Username">  
+    <input type="password" placeholder="Password">  
+    <button>Login</button>  
+  </div>    <!-- Footer -->    <footer>  
+    © 2025 DSRT - Digital Smart Revise Technology. All rights reserved.  
+  </footer>    <script>  
+    // Animasi garis berjatuhan  
+    const canvas = document.querySelector('.falling-lines');  
+    const ctx = canvas.getContext('2d');  
+  
+    let width = canvas.width = window.innerWidth;  
+    let height = canvas.height = window.innerHeight;  
+  
+    const lines = Array(100).fill().map(() => ({  
+      x: Math.random() * width,  
+      y: Math.random() * height,  
+      length: Math.random() * 20 + 10,  
+      speed: Math.random() * 2 + 1  
+    }));  
+  
+    function drawLines() {  
+      ctx.clearRect(0, 0, width, height);  
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';  
+      ctx.lineWidth = 1;  
+  
+      lines.forEach(line => {  
+        ctx.beginPath();  
+        ctx.moveTo(line.x, line.y);  
+        ctx.lineTo(line.x, line.y + line.length);  
+        ctx.stroke();  
+  
+        line.y += line.speed;  
+        if (line.y > height) {  
+          line.y = -line.length;  
+          line.x = Math.random() * width;  
+        }  
+      });  
+  
+      requestAnimationFrame(drawLines);  
+    }  
+  
+    window.addEventListener('resize', () => {  
+      width = canvas.width = window.innerWidth;  
+      height = canvas.height = window.innerHeight;  
+    });  
+  
+    drawLines();  
+  </script>  </body>  
+</html>  ini cok
 
-  footer {
-    background-color: black;
-    color: yellow;
-    text-align: center;
-    padding: 10px;
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="logo">DSRT</div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Features</a>
-    <a href="#">Login</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Selamat Datang di DSRT</h1>
-</section>
-
-<section class="features">
-  <div class="feature-box">
-    <h3>Fitur 1</h3>
-    <p>Deskripsi fitur 1.</p>
-  </div>
-  <div class="feature-box">
-    <h3>Fitur 2</h3>
-    <p>Deskripsi fitur 2.</p>
-  </div>
-  <div class="feature-box">
-    <h3>Fitur 3</h3>
-    <p>Deskripsi fitur 3.</p>
-  </div>
-</section>
-
-<div class="footer-transparent">
-  <p>Area Transparan di Bawah</p>
-</div>
-
-<footer>
-  <p>© 2025 DSRT. Semua hak dilindungi.</p>
-</footer>
-
-</body>
-</html>
